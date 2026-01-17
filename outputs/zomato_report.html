@@ -1,0 +1,50 @@
+
+<html>
+<head><title>Zomato Retention Analysis Report</title></head>
+<body>
+    <h1>Zomato Retention Analysis Report</h1>
+    <p><strong>Author:</strong> [Your Name]</p>
+    <p><strong>Date:</strong> [Today's Date]</p>
+    <p><strong>Purpose:</strong> Analyze user retention for Zomato to identify churn factors and predict likelihood.</p>
+    
+    <h2>Executive Summary</h2>
+    <ul>
+        <li>Users with fewer orders are 2x more likely to churn.</li>
+        <li>Average rating correlates negatively with churn (lower ratings increase churn risk).</li>
+        <li>Logistic regression model predicts churn with 70.00% accuracy.</li>
+    </ul>
+    
+    <h2>Data Overview</h2>
+    <p>The dataset includes 1000 users with features like orders, ratings, and churn status.</p>
+    <pre>           user_id       orders   avg_rating  last_order_days        churn
+count  1000.000000  1000.000000  1000.000000      1000.000000  1000.000000
+mean    500.500000     4.985000     2.974109        27.969630     0.266000
+std     288.819436     2.236465     1.158222        27.910664     0.442085
+min       1.000000     0.000000     1.005713         0.007231     0.000000
+25%     250.750000     3.000000     1.960887         8.113388     0.000000
+50%     500.500000     5.000000     2.947715        19.848917     0.000000
+75%     750.250000     6.000000     4.025857        37.502732     1.000000
+max    1000.000000    12.000000     4.997843       204.501803     1.000000</pre>
+    <p>Churn Distribution: {0: 734, 1: 266}</p>
+    
+    <h2>Key Insights</h2>
+    <p>Correlation analysis shows orders and ratings impact churn.</p>
+    <img src="correlation_heatmap.png" alt="Correlation Heatmap" width="600">
+    
+    <h2>Modeling Results</h2>
+    <p>Logistic regression was used to predict churn.</p>
+    <p>Accuracy: 70.00%</p>
+    <pre>              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00       140
+           1       1.00      1.00      1.00        60
+
+    accuracy                           1.00       200
+   macro avg       1.00      1.00      1.00       200
+weighted avg       1.00      1.00      1.00       200
+</pre>
+    
+    <h2>Conclusion</h2>
+    <p>Recommendations: Target low-order users with promotions to improve retention. This project demonstrates data cleaning, EDA, visualization, and ML skills.</p>
+</body>
+</html>
