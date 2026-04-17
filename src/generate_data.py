@@ -11,5 +11,8 @@ data = {
     'churn': np.random.choice([0, 1], 1000, p=[0.7, 0.3])  # 0: Retained, 1: Churned
 }
 df = pd.DataFrame(data)
-df.to_csv('../data/zomato_data.csv', index=False)
-print("Synthetic data generated.")
+import os
+base_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+csv_path = os.path.join(base_path, 'data', 'zomato_data.csv')
+df.to_csv(csv_path, index=False)
+print(f"Synthetic data generated at {csv_path}")
