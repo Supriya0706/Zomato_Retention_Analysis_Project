@@ -1,18 +1,19 @@
-# Predictive BI & Retention Analytics Pipeline 📊🤖
+# Zomato Retention Analytics Pipeline 📊🍕
 
-An end-to-end Data Engineering and Business Intelligence pipeline targeting user retention. We ingest raw customer data, enrich it via a Machine Learning model (Random Forest), transform it into a **Star Schema data model**, and serve the insights through a **Microsoft Power BI** executive dashboard and a FastAPI backend.
+An end-to-end Data Engineering and Business Intelligence pipeline targeting user retention. We ingest raw customer data, perform Exploratory Data Analysis (EDA), transform it into a **Star Schema data model**, and serve the insights through a **Microsoft Power BI** executive dashboard and a React/FastAPI web application.
 
-**Perfectly suited for showcasing Business Intelligence, Data Engineering, and Predictive Analytics skills.**
+**Perfectly suited for showcasing Business Intelligence, Data Engineering, and Data Analysis skills.**
 
 ---
 
-## 🎯 Project Highlights for BI
+## 🎯 Project Highlights
 
-Instead of standard flat-file analysis, this project demonstrates enterprise-level BI patterns:
-- **ETL & Data Enrichment**: Python scripts automate the extraction of transactional data, processing it through an ML pipeline to append *predictive risk scores*.
-- **Kimball Data Modeling**: The output is structured into a rigorous Star Schema (`Dim_Users`, `Fact_Activity`, `Fact_Predictions`) optimized for Power BI.
-- **Advanced DAX**: Utilizes calculated measures and context-aware DAX for deep drill-down analytics.
-- **API Microservice**: A FastAPI backend that serves the predictive model, simulating an enterprise analytics gateway.
+Instead of standard flat-file analysis, this project demonstrates enterprise-level data patterns:
+- **Data Engineering / ETL**: Python scripts automate the extraction of transactional data and perform data cleaning/transformation.
+- **Kimball Data Modeling**: The output is structured into a rigorous Star Schema (`Dim_Users`, `Fact_Activity`) optimized for Power BI.
+- **Exploratory Data Analysis (EDA)**: Generation of correlation matrices and churn distribution reports to identify key drivers of customer retention.
+- **Advanced DAX & BI**: Utilizes calculated measures and context-aware DAX for deep drill-down analytics in Power BI.
+- **API Microservice & Dashboard**: A FastAPI backend that serves the data aggregations to a responsive React dashboard, simulating an enterprise analytics gateway.
 
 ---
 
@@ -22,13 +23,13 @@ Instead of standard flat-file analysis, this project demonstrates enterprise-lev
 [ Raw Data Source ] ---> [ Python ETL & Cleaning ]
                                  |
                                  V
-[ ML Model Deployment ] <---- [ Scikit-Learn Random Forest ]
-      (FastAPI)                  | (Predicts churn probability)
-                                 V
                        [ Star Schema Data Mart ]
                        - Dim_Users 
                        - Fact_Activity
-                       - Fact_Predictions
+                                 |
+                                 V
+                      [ Backend Analytics API ] <---> [ React Dashboard ]
+                      (FastAPI, Serves JSON)          (Visualizes Metrics)
                                  |
                                  V
                       [ Power BI Dashboard ]
@@ -43,8 +44,8 @@ To impress BI hiring managers, this project goes beyond simple visualizations. C
 
 **Skills Demonstrated:**
 1. **Data Modeling**: Building 1-to-Many relationships bridging Dimension and Fact tables.
-2. **DAX Formulation**: Writing explicit measures for `Churn Risk %`, `At-Risk User Counts`, and conditional formatting logic.
-3. **Actionable BI**: The dashboard isn't just descriptive; it's prescriptive, providing a "hit-list" of high-risk users sourced directly from the ML backend.
+2. **DAX Formulation**: Writing explicit measures for `Churn Rate %`, `Retained User Counts`, and conditional formatting logic.
+3. **Actionable BI**: Providing actionable insights by segmenting users based on order volume and ratings.
 
 > 👉 **View the Power BI Setup Guide:** [`powerbi/README_powerbi.md`](powerbi/README_powerbi.md)
 
@@ -54,19 +55,20 @@ To impress BI hiring managers, this project goes beyond simple visualizations. C
 
 - **Business Intelligence**: Power BI Desktop, DAX, Data Modeling (Star Schema)
 - **Data Engineering / ETL**: Python, Pandas, Numpy
-- **Machine Learning**: Scikit-Learn (Random Forest Classifier)
 - **Backend APIs**: FastAPI, Uvicorn, Docker
-- **Frontend (Optional)**: React + Vite web dashboard
+- **Frontend Dashboard**: React + Vite, Recharts, Tailwind CSS
 
 ---
 
 ## 🚀 How to Run the Project
 
 ### 1. Run the ETL & BI Extract Pipeline
-Generate the Star Schema data tables locally. This runs the ML model and enriches your data.
+Clean the data and generate the Star Schema data tables locally.
 ```bash
 pip install -r backend/requirements.txt
 cd src
+python data_cleaning.py
+python eda.py
 python export_powerbi.py
 ```
 *Output will drop properly formatted CSVs into `data/powerbi_model/`*
@@ -75,12 +77,20 @@ python export_powerbi.py
 1. Import the generated Star Schema files into Power BI.
 2. Follow the model structuring and DAX instructions located in the `powerbi/` directory.
 
-### 3. Spin up the Analytics API (Optional)
-Serve your ML model locally as a RESTful service.
+### 3. Spin up the Analytics API and Dashboard
+**Backend (FastAPI):**
 ```bash
-uvicorn backend.main:app --reload --port 8000
+cd backend
+uvicorn main:app --reload --port 8000
 ```
 API Documentation available at: `http://localhost:8000/docs`
 
+**Frontend (React):**
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
 ---
-*Created by [Supriya0706](https://github.com/Supriya0706)*
+*Created for showcasing Data Analysis and Business Intelligence expertise.*
