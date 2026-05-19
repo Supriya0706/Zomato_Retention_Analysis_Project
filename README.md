@@ -1,6 +1,8 @@
-# Zomato Retention Analytics Pipeline 📊🍕
+# Zomato Retention Analytics Pipeline 📊🤖🍕
 
-An end-to-end Data Engineering and Business Intelligence pipeline targeting user retention. We ingest raw customer data, perform Exploratory Data Analysis (EDA), transform it into a **Star Schema data model**, and serve the insights through a **Microsoft Power BI** executive dashboard and a React/FastAPI web application.
+![Project Banner](docs/images/dashboard_mockup.png)
+
+An end-to-end Data Engineering and Business Intelligence pipeline targeting user retention. We ingest raw customer data, enrich it via a **Machine Learning model (Random Forest)**, transform it into a **Star Schema data model**, and serve the insights through a **Microsoft Power BI** executive dashboard and a **React/FastAPI** web application.
 
 **Perfectly suited for showcasing Business Intelligence, Data Engineering, and Data Analysis skills.**
 
