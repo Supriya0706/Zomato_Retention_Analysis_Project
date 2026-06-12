@@ -94,5 +94,26 @@ npm install
 npm run dev
 ```
 
+## 🌐 Deployment
+
+This project is configured for easy deployment on **Vercel** (Frontend/Fullstack) and **Render** (Backend).
+
+### Option 1: Full-stack on Vercel (Recommended)
+1. Import your repository into **Vercel**.
+2. Vercel will detect the `vercel.json` and automatically deploy the Vite frontend and FastAPI backend.
+3. Your API will be available at `<your-url>/api`.
+
+### Option 2: Frontend (Vercel) + Backend (Render)
+**Backend (Render):**
+1. Create a new **Web Service** on Render.
+2. Connect your GitHub repository.
+3. Select **Docker** as the runtime.
+4. Render will use the root `Dockerfile` to deploy the API.
+
+**Frontend (Vercel):**
+1. Import your repository into Vercel.
+2. Set the **Root Directory** to `frontend`.
+3. Set the **Environment Variable** `VITE_API_URL` to your Render service URL.
+
 ---
 *Created for showcasing Data Analysis and Business Intelligence expertise.*
