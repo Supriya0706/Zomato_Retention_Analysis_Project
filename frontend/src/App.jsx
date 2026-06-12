@@ -8,6 +8,9 @@ import { UserCheck, UserX, Activity, PieChart as PieChartIcon, Star, TrendingUp,
 const API_URL = (import.meta.env.VITE_API_URL || '/api').replace(/\/$/, '');
 
 function App() {
+  const [stats, setStats] = useState(null);
+  const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
