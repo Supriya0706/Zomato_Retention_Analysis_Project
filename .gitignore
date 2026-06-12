@@ -1,0 +1,30 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pkl
+*.egg-info/
+dist/
+build/
+.eggs/
+.env
+.env.*
+
+# Node
+node_modules/
+frontend/dist/
+frontend/.env
+frontend/.env.*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Outputs (regenerated)
+outputs/*.png
