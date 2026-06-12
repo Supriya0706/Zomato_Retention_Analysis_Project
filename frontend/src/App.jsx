@@ -5,7 +5,7 @@ import {
 } from 'recharts';
 import { UserCheck, UserX, Activity, PieChart as PieChartIcon, Star, TrendingUp } from 'lucide-react';
 
-const API_URL = (import.meta.env.VITE_API_URL || 'http://localhost:8000').replace(/\/$/, '');
+const API_URL = (import.meta.env.VITE_API_URL || '/api').replace(/\/$/, '');
 
 function App() {
   const [stats, setStats] = useState(null);
