@@ -8,25 +8,32 @@ import { UserCheck, UserX, Activity, PieChart as PieChartIcon, Star, TrendingUp 
 const API_URL = (import.meta.env.VITE_API_URL || '/api').replace(/\/$/, '');
 
 function App() {
-  const [stats, setStats] = useState(null);
-  const [data, setData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
+    setIsLoading(true);
     Promise.all([
-      fetch(`${API_URL}/stats`).then(res => res.json()),
-      fetch(`${API_URL}/data`).then(res => res.json())
+      fetch(`${API_URL}/stats`).then(res => {
+        if (!res.ok) throw new Error(`Stats endpoint failed: ${res.status}`);
+        return res.json();
+      }),
+      fetch(`${API_URL}/data`).then(res => {
+        if (!res.ok) throw new Error(`Data endpoint failed: ${res.status}`);
+        return res.json();
+      })
     ])
     .then(([statsData, dataRes]) => {
       setStats(statsData);
       setData(dataRes);
       setIsLoading(false);
+      setError(null);
     })
     .catch(err => {
       console.error("Error fetching data:", err);
+      setError(err.message);
       setIsLoading(false);
     });
-  }, []);
+  }, [API_URL]);
 
   const pieData = stats ? [
     { name: 'Retained', value: stats.retained, fill: '#10b981' },
@@ -54,6 +61,16 @@ function App() {
         <div style={{ textAlign: 'center', marginTop: '4rem' }}>
           <Activity size={48} className="animate-spin" style={{ color: 'var(--accent-primary)', margin: '0 auto' }} />
           <p style={{ marginTop: '1rem', color: 'var(--text-secondary)' }}>Syncing Analytics Gateway...</p>
+        </div>
+      ) : error ? (
+        <div style={{ textAlign: 'center', marginTop: '4rem', padding: '2rem' }} className="glass-panel">
+          <Activity size={48} style={{ color: 'var(--risk-high)', margin: '0 auto' }} />
+          <h2 style={{ marginTop: '1rem' }}>Connection Error</h2>
+          <p style={{ color: 'var(--text-secondary)', marginBottom: '1rem' }}>{error}</p>
+          <div style={{ fontSize: '0.8rem', background: 'rgba(0,0,0,0.2)', padding: '1rem', borderRadius: '8px', display: 'inline-block' }}>
+            Attempted URL: <code>{API_URL}</code>
+          </div>
+          <p style={{ marginTop: '1rem' }}>Please verify that your backend is running and the <code>VITE_API_URL</code> environment variable is set correctly.</p>
         </div>
       ) : (
         <>
