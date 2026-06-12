@@ -6,116 +6,49 @@
 
 ---
 
+## 🎯 Project Overview
+An end-to-end **Data Engineering and Business Intelligence** pipeline designed to analyze and predict customer retention. This project transforms raw Zomato customer data into actionable insights through a rigorous **Star Schema** data model, served via a high-performance **FastAPI** backend and a premium **React** analytics hub.
+
 **Perfectly suited for showcasing Business Intelligence, Data Engineering, and Data Analysis skills.**
 
 ---
 
-## 🎯 Project Highlights
-
-Instead of standard flat-file analysis, this project demonstrates enterprise-level data patterns:
-- **Data Engineering / ETL**: Python scripts automate the extraction of transactional data and perform data cleaning/transformation.
-- **Kimball Data Modeling**: The output is structured into a rigorous Star Schema (`Dim_Users`, `Fact_Activity`) optimized for Power BI.
-- **Exploratory Data Analysis (EDA)**: Generation of correlation matrices and churn distribution reports to identify key drivers of customer retention.
-- **Advanced DAX & BI**: Utilizes calculated measures and context-aware DAX for deep drill-down analytics in Power BI.
-- **API Microservice & Dashboard**: A FastAPI backend that serves the data aggregations to a responsive React dashboard, simulating an enterprise analytics gateway.
+## 🏗️ Architecture & Pipeline
+1. **Data Ingestion & ETL**: Python scripts automate extraction, cleaning, and transformation of transactional data.
+2. **Kimball Data Modeling**: Structured into a specialized Star Schema (`Dim_Users`, `Fact_Activity`) for high-performance querying.
+3. **Analytics API**: A FastAPI gateway serves data aggregations and computed metrics to the frontend.
+4. **Interactive Dashboard**: A custom-built React application providing real-time visualizations and retention insights.
 
 ---
 
-## 🏗️ Architecture
-
-```text
-[ Raw Data Source ] ---> [ Python ETL & Cleaning ]
-                                 |
-                                 V
-                       [ Star Schema Data Mart ]
-                       - Dim_Users 
-                       - Fact_Activity
-                                 |
-                                 V
-                      [ Backend Analytics API ] <---> [ React Dashboard ]
-                      (FastAPI, Serves JSON)          (Visualizes Metrics)
-                                 |
-                                 V
-                      [ Power BI Dashboard ]
-                      (DAX, Relationships, Visuals)
-```
-
----
-
-## 📊 The Power BI Implementation
-
-To impress BI hiring managers, this project goes beyond simple visualizations. Check out the dedicated guide in the `powerbi/` folder.
-
-**Skills Demonstrated:**
-1. **Data Modeling**: Building 1-to-Many relationships bridging Dimension and Fact tables.
-2. **DAX Formulation**: Writing explicit measures for `Churn Rate %`, `Retained User Counts`, and conditional formatting logic.
-3. **Actionable BI**: Providing actionable insights by segmenting users based on order volume and ratings.
-
-> 👉 **View the Power BI Setup Guide:** [`powerbi/README_powerbi.md`](powerbi/README_powerbi.md)
+## 📊 Key Features
+- **Exploratory Analytics**: Interactive Pie and Bar charts for churn distribution and order-volume correlation.
+- **Automated Monitoring**: Live synchronization with the backend data mart for absolute metric accuracy.
+- **Premium UI**: Built with a sleek Glassmorphic design, optimized for interview presentations.
+- **Explainable BI**: Focuses on clear business heuristics (Recency, Rating, Frequency) over black-box models.
 
 ---
 
 ## 💻 Tech Stack
-
-- **Business Intelligence**: Power BI Desktop, DAX, Data Modeling (Star Schema)
-- **Data Engineering / ETL**: Python, Pandas, Numpy
-- **Backend APIs**: FastAPI, Uvicorn, Docker
-- **Frontend Dashboard**: React + Vite, Recharts, Tailwind CSS
+- **Languages**: Python (Backend), JavaScript (Frontend)
+- **Frameworks**: FastAPI, React + Vite
+- **Data Visualization**: Recharts, Lucide-React
+- **Data Processing**: Pandas, NumPy
+- **Deployment**: Vercel (Frontend & Full-stack), Render (Dockerized Backend)
 
 ---
 
-## 🚀 How to Run the Project
+## 🚀 Deployment Guide
 
-### 1. Run the ETL & BI Extract Pipeline
-Clean the data and generate the Star Schema data tables locally.
-```bash
-pip install -r backend/requirements.txt
-cd src
-python data_cleaning.py
-python eda.py
-python export_powerbi.py
-```
-*Output will drop properly formatted CSVs into `data/powerbi_model/`*
+### Option 1: Full-stack on Vercel (Auto-Sync)
+The easiest way to host the entire pipeline:
+1. Connect this repo to **Vercel**.
+2. Vercel will automatically use the `vercel.json` to deploy both the Frontend and the Python Backend.
+3. Your dashboard will be live at the root, and the API at `/api`.
 
-### 2. Open the Power BI Dashboard
-1. Import the generated Star Schema files into Power BI.
-2. Follow the model structuring and DAX instructions located in the `powerbi/` directory.
-
-### 3. Spin up the Analytics API and Dashboard
-**Backend (FastAPI):**
-```bash
-cd backend
-uvicorn main:app --reload --port 8000
-```
-API Documentation available at: `http://localhost:8000/docs`
-
-**Frontend (React):**
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-## 🌐 Deployment
-
-This project is configured for easy deployment on **Vercel** (Frontend/Fullstack) and **Render** (Backend).
-
-### Option 1: Full-stack on Vercel (Recommended)
-1. Import your repository into **Vercel**.
-2. Vercel will detect the `vercel.json` and automatically deploy the Vite frontend and FastAPI backend.
-3. Your API will be available at `<your-url>/api`.
-
-### Option 2: Frontend (Vercel) + Backend (Render)
-**Backend (Render):**
-1. Create a new **Web Service** on Render.
-2. Connect your GitHub repository.
-3. Select **Docker** as the runtime.
-4. Render will use the root `Dockerfile` to deploy the API.
-
-**Frontend (Vercel):**
-1. Import your repository into Vercel.
-2. Set the **Root Directory** to `frontend`.
-3. Set the **Environment Variable** `VITE_API_URL` to your Render service URL.
+### Option 2: Split Deployment
+- **Backend (Render)**: Deploy as a **Web Service** using the root `Dockerfile`.
+- **Frontend (Vercel)**: Deploy the `frontend/` folder and set `VITE_API_URL` to your Render URL.
 
 ---
 *Created for showcasing Data Analysis and Business Intelligence expertise.*
