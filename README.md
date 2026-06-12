@@ -1,8 +1,10 @@
-# Zomato Retention Analytics Pipeline 📊🤖🍕
+# Zomato Retention Analysis 📊🤖🍕
 
-![Project Banner](docs/images/dashboard_mockup.png)
+![Project Banner](docs/images/dashboard_banner.png)
 
-An end-to-end Data Engineering and Business Intelligence pipeline targeting user retention. We ingest raw customer data, enrich it via a **Machine Learning model (Random Forest)**, transform it into a **Star Schema data model**, and serve the insights through a **Microsoft Power BI** executive dashboard and a **React/FastAPI** web application.
+> **Live Website:** [zomato-retention-analysis-project.vercel.app](https://zomato-retention-analysis-project.vercel.app/)
+
+---
 
 **Perfectly suited for showcasing Business Intelligence, Data Engineering, and Data Analysis skills.**
 
