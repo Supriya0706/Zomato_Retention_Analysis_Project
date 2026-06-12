@@ -3,7 +3,7 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
   PieChart, Pie, Cell
 } from 'recharts';
-import { UserCheck, UserX, Activity, PieChart as PieChartIcon, Star, TrendingUp } from 'lucide-react';
+import { UserCheck, UserX, Activity, PieChart as PieChartIcon, Star, TrendingUp, Zap } from 'lucide-react';
 
 const API_URL = (import.meta.env.VITE_API_URL || '/api').replace(/\/$/, '');
 
