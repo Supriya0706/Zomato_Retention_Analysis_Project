@@ -108,7 +108,7 @@ def get_metrics():
 
 def predict(orders: float, avg_rating: float, last_order_days: float):
     model, scaler = get_model_and_scaler()
-    X = np.array([[orders, avg_rating, last_order_days]])
+    X = pd.DataFrame([[orders, avg_rating, last_order_days]], columns=_feature_names)
     X_s = scaler.transform(X)
     prob = float(model.predict_proba(X_s)[0][1])
     pred = int(model.predict(X_s)[0])
