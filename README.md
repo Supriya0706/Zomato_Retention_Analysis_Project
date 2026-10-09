@@ -31,6 +31,17 @@ An end-to-end customer retention analytics project: synthetic order data, a SQL 
 **Churn classifier (Random Forest, 80/20 stratified split):**
 accuracy 0.77, precision 0.73, recall 0.64, F1 0.68, ROC-AUC 0.84 (5-fold CV accuracy 0.78 ± 0.02). The majority-class baseline is about 0.62. Feature importance: days since last order 0.45, orders 0.32, rating 0.23.
 
+**Model comparison (`src/compare_models.py`, same 80/20 split plus 5-fold x 3-repeat CV):**
+
+| Model | Test accuracy | Test ROC-AUC | CV accuracy | CV ROC-AUC |
+|---|---|---|---|---|
+| Majority baseline | 0.615 | 0.500 | 0.613 | 0.500 |
+| Logistic Regression | **0.785** | **0.840** | **0.794 ± 0.017** | **0.854 ± 0.018** |
+| Decision Tree (depth 4) | 0.770 | 0.822 | 0.741 ± 0.032 | 0.796 ± 0.030 |
+| Random Forest | 0.770 | 0.836 | 0.770 ± 0.023 | 0.831 ± 0.016 |
+
+Logistic Regression scored higher than the Random Forest on all 15 CV folds (mean ROC-AUC difference +0.023). This is expected: the synthetic churn labels were generated from a logistic function of the features, so a logistic model matches the data-generating process. The deployed API still serves the Random Forest; on real data the ranking could differ.
+
 **K-Means segments (k = 3, silhouette 0.41):** Loyal (353 users, 13% churn), At-Risk (487, 44%), Dormant (160, 81%). Churn was *not* an input to the clustering, yet churn rate rises steadily across the segments.
 
 **SARIMA forecast (last 6 months held out):**
@@ -47,6 +58,7 @@ accuracy 0.77, precision 0.73, recall 0.64, F1 0.68, ROC-AUC 0.84 (5-fold CV acc
 
 - **Synthetic data.** The relationships the models find were put there by the generator. Good scores show the pipeline works, not that these patterns exist in real customers.
 - **SARIMA on 24 points.** The series has only two seasonal cycles, and its trend and seasonality were built in by the generator. Seasonal differencing (D=1) diverged on 18 training months, so a model without seasonal differencing was chosen after comparing several orders by backtest. Treat the forecast as a demonstration of method.
+- **Model ranking is specific to this data.** Logistic Regression beats the Random Forest here because the labels were generated logistically; do not read this as a general statement about the two algorithms.
 - **Region and acquisition channel** have no effect on churn in the generated data; their charts look flat by design.
 - **K-Means labels** (Loyal / At-Risk / Dormant) are assigned from cluster centres. Clusters are multivariate, so a cluster's label may not match every single metric (the At-Risk cluster has slightly *more* recent orders than Loyal but much lower frequency and spend).
 - **Power BI report** contains the Random Forest risk predictions and the activity data. The K-Means segments and the SARIMA forecast appear in the React dashboard only.
@@ -77,6 +89,7 @@ python sql/build_db.py           # load SQLite database
 python sql/run_queries.py        # cohort retention + RFM segments
 python src/segmentation.py       # K-Means segments
 python src/forecasting.py        # SARIMA backtest + forecast chart
+python src/compare_models.py     # Logistic Regression vs Decision Tree vs Random Forest
 python src/eda.py                # heatmaps -> outputs/
 python src/export_powerbi.py     # star-schema CSVs for Power BI
 

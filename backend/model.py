@@ -52,7 +52,8 @@ def _load_and_train():
     X_train_s = scaler.fit_transform(X_train)
     X_test_s = scaler.transform(X_test)
 
-    # Random Forest — better than plain Logistic Regression
+    # Random Forest (hyperparameters fixed). See src/compare_models.py for a head-to-head
+    # comparison with Logistic Regression and a Decision Tree on the same splits.
     rf = RandomForestClassifier(n_estimators=200, max_depth=6, random_state=42)
     rf.fit(X_train_s, y_train)
 
